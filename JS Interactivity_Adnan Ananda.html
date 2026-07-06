@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebGIS SPKLU</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f4f6f9;
+        }
+
+        #judul_web {
+            text-align: center;
+            color: #2c3e50;
+            margin-top: 20px;
+        }
+
+        nav {
+            background: #2c3e50;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            margin: 10px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        section {
+            padding: 30px;
+        }
+
+        h1,
+        h2 {
+            color: #2c3e50;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 60%;
+            margin-top: 10px;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+
+        th {
+            background: #3498db;
+            color: white;
+        }
+
+        input,
+        textarea {
+            padding: 8px;
+            width: 250px;
+            margin-top: 5px;
+        }
+
+        button {
+            padding: 10px 15px;
+            background: #3498db;
+            color: white;
+            border: none;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background: #2980b9;
+        }
+
+        iframe {
+            display: block;
+            margin: auto;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .loading {
+            color: blue;
+            font-weight: bold;
+        }
+
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+
+        #cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+
+    <section id="home">
+
+        <h1 id="judul_web">WebGIS Analisis Lokasi SPKLU</h1>
+
+        <nav>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#map">Map</a>
+    <a href="#geomapidData">Data</a>  
+</nav>
+
+        <p>
+            <b>Project:</b>
+            <i>WebGIS Analisis Lokasi Potensial EV Charging Station</i>
+        </p>
+
+        <p>
+            This WebGIS project aims to identify potential locations for EV charging stations
+            based on accessibility, activity density, and existing infrastructure.
+        </p>
+
+        <button id="colorBtn">Ubah Warna Judul</button>
+        <button id="toggleBtn">Tampilkan/Sembunyikan About</button>
+
+        <h2>Problems</h2>
+
+        <ul>
+            <li>Limited SPKLU coverage</li>
+            <li>Uneven distribution</li>
+            <li>Need better planning tools</li>
+        </ul>
+
+        <h2>Target Users</h2>
+
+        <ol>
+            <li>Government</li>
+            <li>Companies</li>
+            <li>Public</li>
+            <li>Investors</li>
+        </ol>
+
+        <h2>Data Used</h2>
+
+        <table>
+            <tr>
+                <th>Type</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>Spatial</td>
+                <td>Roads, SPKLU, Buildings</td>
+            </tr>
+            <tr>
+                <td>Non-Spatial</td>
+                <td>Capacity, Charger Type</td>
+            </tr>
+        </table>
+
+    </section>
+
+    <section id="about">
+
+        <h2>About Me</h2>
+
+        <p><b>Name:</b> Adnan Ananda</p>
+        <p><b>Education:</b> Geodesy and Geomatics Engineering</p>
+        <p><b>Job Title:</b> GIS Engineer</p>
+
+        <h2>Social Media</h2>
+
+        <p>
+            <a href="https://www.linkedin.com/in/adnan-ananda-a34a1a10b/" target="_blank">
+                LinkedIn
+            </a>
+        </p>
+
+        <h2>Contact Form</h2>
+
+        <form>
+            Name:<br>
+            <input type="text"><br><br>
+
+            Email:<br>
+            <input type="email"><br><br>
+
+            Message:<br>
+            <textarea></textarea><br><br>
+
+            <button type="submit">Send</button>
+        </form>
+
+    </section>
+
+    <section id="map">
+
+        <h2>Map Visualization</h2>
+
+        <ul>
+            <li>Interactive Map</li>
+            <li>Search Location</li>
+            <li>Filter SPKLU</li>
+            <li>Heatmap Analysis</li>
+        </ul>
+
+       <iframe
+    src="https://www.openstreetmap.org/export/embed.html?bbox=106.6969%2C-6.3711%2C107.0011%2C-6.0855&amp;layer=mapnik"
+    width="80%"
+    height="400"
+    style="border:1px solid #ccc;"
+    title="Peta DKI Jakarta"
+    allowfullscreen
+    loading="lazy">
+</iframe>
+
+    </section>
+
+    <section id="geomapidData">
+
+        <h2>Data Geomapid</h2>
+
+        <button id="loadDataBtn">Load Data Geomapid</button>
+
+        <p id="loading"></p>
+
+        <div id="cards-container"></div>
+
+    </section>
+
+    <footer>
+        <p>© 2026 WebGIS SPKLU - Adnan Ananda</p>
+    </footer>
+
+    <script>
+        // Interaksi 1: Ubah warna judul
+
+        const colorBtn = document.getElementById("colorBtn");
+        const title = document.getElementById("judul_web");
+
+        colorBtn.addEventListener("click", () => {
+
+            if (title.style.color === "green") {
+                title.style.color = "#2c3e50";
+            } else {
+                title.style.color = "green";
+            }
+
+        });
+
+
+        // Interaksi 2: Show / Hide About
+
+        const toggleBtn = document.getElementById("toggleBtn");
+        const aboutSection = document.getElementById("about");
+
+        toggleBtn.addEventListener("click", () => {
+            aboutSection.classList.toggle("hidden");
+        });
+
+
+        // Fetch API Geomapid
+
+        const loadBtn = document.getElementById("loadDataBtn");
+
+        loadBtn.addEventListener("click", getGeomapidData);
+
+        async function getGeomapidData() {
+
+            const loading = document.getElementById("loading");
+            const container = document.getElementById("cards-container");
+
+            loading.innerHTML = '<span class="loading">Loading data...</span>';
+            container.innerHTML = "";
+
+            const url =
+                "https://geoserver.mapid.io/layers_new/get_layer?api_key=7b8019aa264248e89e3fd5b27253132f&layer_id=69ace1b8643f7636a769ce7c&project_id=69ab9fb96c69e6252868efaf";
+
+            try {
+
+                const response = await fetch(url);
+
+                if (!response.ok) {
+                    throw new Error("Failed to fetch");
+                }
+
+                const data = await response.json();
+
+                console.log(data);
+
+                loading.innerHTML = "";
+
+                container.innerHTML = `
+                    <div class="card">
+                        <h3>Data berhasil dimuat</h3>
+                        <p>Silakan buka Developer Tools (F12) dan lihat Console untuk struktur data API Geomapid.</p>
+                    </div>
+                `;
+
+            } catch (error) {
+
+                loading.innerHTML =
+                    '<span class="error">Gagal mengambil data dari API.</span>';
+
+                console.error(error);
+            }
+        }
+    </script>
+
+</body>
+
+</html>
